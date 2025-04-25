@@ -1,4 +1,4 @@
-FROM node:18-alpine
+FROM node:latest-alpine3.18
 WORKDIR /app
 
 # First copy ONLY package files
