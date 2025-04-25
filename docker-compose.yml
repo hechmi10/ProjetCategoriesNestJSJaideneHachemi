@@ -1,0 +1,24 @@
+version: "3"
+services:
+  app:
+    build: .
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+    networks:
+      - app7
+    depends_on:
+      - sgbd
+  sgbd:
+    image: mongo:latest
+    ports:
+      - "3005:27017"
+    volumes:
+      - data:/data/db
+    networks:
+      - app7
+volumes:
+  data:
+networks:
+  app7:
