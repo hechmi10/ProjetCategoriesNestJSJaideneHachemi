@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:18-alpine
 WORKDIR /app
 
 # First copy ONLY package files
@@ -6,7 +6,6 @@ COPY package*.json ./
 
 # Then install dependencies
 RUN npm install
-RUN npm install passport-jwt
 
 # Then copy everything else
 COPY . .
