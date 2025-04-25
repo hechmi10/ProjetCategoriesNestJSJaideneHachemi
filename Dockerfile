@@ -1,21 +1,18 @@
-FROM node:latest
+FROM node:18-alpine
 WORKDIR /app
 
-# Copy package files first for better layer caching
+# First copy ONLY package files
 COPY package*.json ./
-COPY prisma ./prisma
 
-# Install dependencies (including devDependencies for build)
+# Then install dependencies
 RUN npm install
 
-# Copy the rest of the files
+# Then copy everything else
 COPY . .
 
-# Build the project
-RUN npm run build
-
-# Remove devDependencies after build
-RUN npm prune --production
+# Build and cleanup
+RUN npm run build && \
+    npm prune --production
 
 EXPOSE 3001
-CMD ["npm", "run", "start:prod"]
+CMD ["node", "dist/main.js"]
