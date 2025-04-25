@@ -6,6 +6,7 @@ COPY package*.json ./
 
 # Then install dependencies
 RUN npm install
+RUN npm install passport-jwt
 
 # Then copy everything else
 COPY . .
